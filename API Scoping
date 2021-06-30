@@ -2,7 +2,7 @@ import requests
 import json
 import pandas
 
-API_Key = '2BEB86FA-7EFC-4CA9-B203-5DB5CA3F089D'
+API_Key = <<PRIVATE>>
 url = 'https://connectapi.brandbank.com/api/' + API_Key
 output = requests.get(url).json()
 i = 0
