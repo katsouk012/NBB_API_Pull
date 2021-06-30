@@ -1,25 +1,28 @@
 import requests
-import json
-import pandas
+import pandas as pd
+#import json
+#import numpy as np
 
-API_Key = <<PRIVATE>>
-url = 'https://connectapi.brandbank.com/api/' + API_Key
+# Dev key used here
+API_Key = 'INPUT HERE'
+
+#Can pull up to 1000 at one time (but it's slow - test small first)
+url = 'https://connectapi.brandbank.com/api/' + API_Key + '?products=1000'
 output = requests.get(url).json()
 i = 0
 
 for page in range(1,1):
-    url2 = url + '.json' + '?page=%s'%page
+    url2 = url + '?page=%s'%page
     response = requests.get(url)
     status = response.status_code
     if status == 204:
         break
     else :
-        data = requests.get(url).json()
+        data = (requests.get(url).json())
         output = output + data
-        #i = i + 1
-        #print(len(str(output)))
-
-#print(i)
+        i = i + 1
+        #print(i)
+        print(len(output))
 
 output_normalized=pd.json_normalize(output, max_level=1)
-output_normalized.to_csv("bb_pull.csv")
+output_normalized.to_csv("bb_pull2.csv")
