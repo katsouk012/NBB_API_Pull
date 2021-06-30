@@ -17,10 +17,9 @@ for page in range(1,1):
         data = requests.get(url).json()
         output = output + data
         #i = i + 1
-        #print(i)
         #print(len(str(output)))
 
+#print(i)
 
-print(str(output))
-#f = open('brandbank_api_10sample.txt', 'w')
-#f.write(str(output))
+output_normalized=pd.json_normalize(output, max_level=1)
+output_normalized.to_csv("bb_pull.csv")
