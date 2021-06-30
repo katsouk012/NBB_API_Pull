@@ -1,0 +1,26 @@
+import requests
+import json
+import pandas
+
+API_Key = '2BEB86FA-7EFC-4CA9-B203-5DB5CA3F089D'
+url = 'https://connectapi.brandbank.com/api/' + API_Key
+output = requests.get(url).json()
+i = 0
+
+for page in range(1,1):
+    url2 = url + '.json' + '?page=%s'%page
+    response = requests.get(url)
+    status = response.status_code
+    if status == 204:
+        break
+    else :
+        data = requests.get(url).json()
+        output = output + data
+        #i = i + 1
+        #print(i)
+        #print(len(str(output)))
+
+
+print(str(output))
+#f = open('brandbank_api_10sample.txt', 'w')
+#f.write(str(output))
