@@ -3,11 +3,11 @@ import pandas as pd
 
 API_Key = 'INPUT HERE'
 
-# Max pull of 1000 products enabled
-url = 'https://connectapi.brandbank.com/api/' + API_Key + '?products=1000'
+# API no longer supports pulling more than 1 item per call
+url = 'https://connectapi.brandbank.com/api/' + API_Key + '?products=1'
 i = 0
 
-for page in range(0, 100000):
+for page in range(0, 150000):
     url2 = url + '&page=%s'%page
     response = requests.get(url2)
     status = response.status_code
