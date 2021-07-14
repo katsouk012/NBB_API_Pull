@@ -7,7 +7,7 @@ csvwriter = csv.writer(open('NBB_Dataset_071421.csv', 'a'))
 errorwriter = csv.writer(open('Error_Log_071421.csv', 'a'))
 i = 0
 
-for page in range(0, 10):
+for page in range(0, 150000):
     url2 = url
     response = requests.get(url2)
     status = response.status_code
