@@ -1,14 +1,14 @@
-import requests
-import pandas as pd
+import requests, csv
 
-API_Key = 'INPUT HERE'
+API_Key = <<INPUT API KEY>>
+url = 'https://connectapi.brandbank.com/api/' + API_Key
 
-# API no longer supports pulling more than 1 item per call
-url = 'https://connectapi.brandbank.com/api/' + API_Key + '?products=1'
+csvwriter = csv.writer(open('Test2_NBB_Dataset_071421.csv', 'a'))
+errorwriter = csv.writer(open('Error_Log_071421.csv', 'a'))
 i = 0
 
-for page in range(0, 150000):
-    url2 = url + '&page=%s'%page
+for page in range(0, 10):
+    url2 = url
     response = requests.get(url2)
     status = response.status_code
     i = i + 1
@@ -16,14 +16,11 @@ for page in range(0, 150000):
         break
     else:
         try:
-            data = (requests.get(url2).json())
-            output_df = pd.DataFrame(data)
-            output_df.to_csv("Full_NBB_Dataset_070521.csv", mode='a', header=False)
+            nbb_df = requests.get(url2).json()
+            csvwriter.writerow([nbb_df])
             print(i)
         except:
-            print("error - page: " + str(i))
-            #error_log = error_log + requests.get(url2)
+            error_log = requests.get(url2).json()
+            errorwriter.writerow([error_log])
+            print(str(i) + ' - error')
             pass
-
-#f = open('error_log.txt', 'w')
-#f.write(str(error_log))
