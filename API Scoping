@@ -3,7 +3,7 @@ import requests, csv
 API_Key = <<INPUT API KEY>>
 url = 'https://connectapi.brandbank.com/api/' + API_Key
 
-csvwriter = csv.writer(open('Test2_NBB_Dataset_071421.csv', 'a'))
+csvwriter = csv.writer(open('NBB_Dataset_071421.csv', 'a'))
 errorwriter = csv.writer(open('Error_Log_071421.csv', 'a'))
 i = 0
 
